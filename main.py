@@ -47,7 +47,8 @@ def main():
         player1 = Player('1','X')
         player2 = Player('2','O')
 
-        player1.get_row_from_input()
+        board[player1.get_row_from_input()][player1.get_col_from_input()]
+        print(board)
 
 if __name__ == '__main__':
     main()
