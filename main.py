@@ -23,7 +23,7 @@ class Player:
                 break
 
 
-class turn:
+class Turn_hundler:
     def __init__(self,player1,player2):
         self.player1 = player1
         self.player2 = player2
@@ -46,8 +46,9 @@ def main():
     while run:
         player1 = Player('1','X')
         player2 = Player('2','O')
+        turn = Turn_hundler
 
-        board[player1.get_row_from_input()][player1.get_col_from_input()]
+        board[player1.get_col_from_input() -1 ,player2.get_row_from_input() -1] = player1.shape
         print(board)
 
 if __name__ == '__main__':
