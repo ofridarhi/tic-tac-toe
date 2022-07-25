@@ -1,7 +1,8 @@
 import numpy as np
 
+
 class Player:
-    def __init__(self,name,shape):
+    def __init__(self, name, shape):
         self.shape = shape
         self.name = name
 
@@ -13,6 +14,7 @@ class Player:
             else:
                 return row
                 break
+
     def get_col_from_input(self):
         while True:
             col = int(input("in what col do you want to put it? (1-3)"))
@@ -23,8 +25,8 @@ class Player:
                 break
 
 
-class Turn_hundler:
-    def __init__(self,player1,player2):
+class TurnHandler:
+    def __init__(self, player1, player2):
         self.player1 = player1
         self.player2 = player2
         self.current_player = player1
@@ -40,16 +42,24 @@ class Turn_hundler:
 
 
 def main():
+    ##########################################################
+    # ---------- Init variables ---------------------------
+    ##########################################################
     board = np.array([['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']])
-    print(board)
+    player1 = Player('1', 'X')
+    player2 = Player('2', 'O')
+    turn_handler = TurnHandler(player1, player2)
+    # -------------------------------------------------------
+
+    ##########################################################
+    # ---------- Game Loop -----------------------------
+    ##########################################################
+
     run = True
     while run:
-        player1 = Player('1','X')
-        player2 = Player('2','O')
-        turn = Turn_hundler
-
-        board[player1.get_col_from_input() -1 ,player2.get_row_from_input() -1] = player1.shape
+        board[player1.get_col_from_input() - 1, player2.get_row_from_input() - 1] = player1.shape
         print(board)
+
 
 if __name__ == '__main__':
     main()
