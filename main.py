@@ -31,9 +31,9 @@ class Turn_hundler:
 
     def update_turn(self):
         if self.current_player == self.player1:
-            self.current_player == self.player2
+            self.current_player = self.player2
         else:
-            self.current_player == self.player1
+            self.current_player = self.player1
 
     def get_current_player_shape(self):
         return self.current_player.shape
