@@ -52,12 +52,13 @@ def main():
     # -------------------------------------------------------
 
     ##########################################################
-    # ---------- Game Loop -----------------------------
+    # ---------- Game Loop --------------------------------
     ##########################################################
-
     run = True
     while run:
-        board[player1.get_col_from_input() - 1, player2.get_row_from_input() - 1] = player1.shape
+        current_player = turn_handler.current_player
+        board[current_player.get_col_from_input() - 1, current_player.get_row_from_input() - 1] = current_player.shape
+        turn_handler.update_turn()
         print(board)
 
 
