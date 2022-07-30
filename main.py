@@ -41,19 +41,23 @@ class TurnHandler:
         return self.current_player.shape
 
 
-def is_valid(board, row, col, shape1, shape2):
+def get_input(board, current_player, empty_cell):
     while True:
-        if board[row, col] == shape1 or board[row, col] == shape2:
-            print('sorry this place is already taken please try againe')
-        else:
-            break
+        row = current_player.get_row_from_input() - 1
+        col = current_player.get_col_from_input() - 1
+        if board[row, col] == empty_cell:
+            return row, col
+
+        print('sorry this place is already taken please try againe')
 
 
 def main():
     ##########################################################
     # ---------- Init variables ---------------------------
     ##########################################################
-    board = np.array([['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']])
+    empty_cell = '-'
+    board = np.array([[empty_cell, empty_cell, empty_cell], [empty_cell, empty_cell, empty_cell],
+                      [empty_cell, empty_cell, empty_cell]])
     player1 = Player('1', 'X')
     player2 = Player('2', 'O')
     turn_handler = TurnHandler(player1, player2)
@@ -65,9 +69,7 @@ def main():
     run = True
     while run:
         current_player = turn_handler.current_player
-        col = current_player.get_col_from_input() - 1
-        row = current_player.get_row_from_input() - 1
-        is_valid(board, row, col, player1.shape, player2.shape)
+        row, col = get_input(board, current_player, empty_cell)
         board[row, col] = current_player.shape
         turn_handler.update_turn()
         print(board)
