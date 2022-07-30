@@ -63,8 +63,8 @@ def main():
     run = True
     while run:
         current_player = turn_handler.current_player
-        col = current_player.get_col_from_input
-        row = current_player.get_row_from_input
+        col = current_player.get_col_from_input()
+        row = current_player.get_row_from_input()
         is_valid(board,row,col,player1.shape,player2.shape)
         board[current_player.get_col_from_input() - 1, current_player.get_row_from_input() - 1] = current_player.shape
         turn_handler.update_turn()
