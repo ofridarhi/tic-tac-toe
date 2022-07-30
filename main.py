@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class Player:
     def __init__(self, name, shape):
         self.shape = shape
@@ -23,6 +24,7 @@ class Player:
                 return col
                 break
 
+
 class TurnHandler:
     def __init__(self, player1, player2):
         self.player1 = player1
@@ -38,13 +40,13 @@ class TurnHandler:
     def get_current_player_shape(self):
         return self.current_player.shape
 
-def is_valid(board,row,col,shape1,shape2):
+
+def is_valid(board, row, col, shape1, shape2):
     while True:
-        if board[row,col] == shape1 or board[row,col] == shape2:
+        if board[row, col] == shape1 or board[row, col] == shape2:
             print('sorry this place is already taken please try againe')
         else:
             break
-
 
 
 def main():
@@ -63,10 +65,10 @@ def main():
     run = True
     while run:
         current_player = turn_handler.current_player
-        col = current_player.get_col_from_input()
-        row = current_player.get_row_from_input()
-        is_valid(board,row,col,player1.shape,player2.shape)
-        board[current_player.get_col_from_input() - 1, current_player.get_row_from_input() - 1] = current_player.shape
+        col = current_player.get_col_from_input() - 1
+        row = current_player.get_row_from_input() - 1
+        is_valid(board, row, col, player1.shape, player2.shape)
+        board[row, col] = current_player.shape
         turn_handler.update_turn()
         print(board)
 
