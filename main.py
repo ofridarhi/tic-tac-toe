@@ -1,5 +1,4 @@
 import numpy as np
-import math
 class Player:
     def __init__(self, name, shape):
         self.shape = shape
@@ -57,14 +56,14 @@ def is_winning(board,current_player):
     for i in range(3):
         #horozontal line and         #horozontal line and
         if board[i,0] == board[i,1] == board[i,2] == current_player.shape or board[0,i] == board[1,i] == board[2,i] == current_player.shape:
-            print(f"{current_player.name}wins")
-
-
+            print(f"player{current_player.name}wins")
+            return True
     if board[1,1] == board[2,2] == board[0,0] == current_player.shape:
-        print(f"{current_player.name}player wins")
+        print(f"player{current_player.name} wins")
+        return True
     if board[1,1] == board[0,2] == board[2,0] == current_player.shape:
-        print(f"{current_player.name}wins")
-    return True
+        print(f"player{current_player.name} wins")
+        return True
 def main():
     ##########################################################
     # ---------- Init variables ---------------------------
@@ -86,7 +85,8 @@ def main():
         print(board)
         row, col = get_input(board, current_player, empty_cell)
         board[row,col] = current_player.shape
-        is_winning(board,current_player)
+        if is_winning(board,current_player):
+            break
         turn_handler.update_turn()
 
 
