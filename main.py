@@ -1,6 +1,5 @@
 import numpy as np
-
-
+import math
 class Player:
     def __init__(self, name, shape):
         self.shape = shape
@@ -8,22 +7,27 @@ class Player:
 
     def get_row_from_input(self):
         while True:
-            row = int(input("in what row do you want to put it? (1-3)"))
-            if row < 1 or row > 3:
-                print("the number must be in range")
+            try:
+                row = int(input("in what row do you want to put it? (1-3)"))
+                if row < 1 or row > 3:
+                    print("the number must be in range")
+            except:
+                print("input must be a number")
             else:
                 return row
                 break
 
     def get_col_from_input(self):
         while True:
-            col = int(input("in what col do you want to put it? (1-3)"))
-            if col < 1 or col > 3:
-                print("the number must be in range")
+            try:
+                col = int(input("in what col do you want to put it? (1-3)"))
+                if col < 1 or col > 3:
+                    print("the number must be in range")
+            except:
+                print("input must be a number")
             else:
                 return col
                 break
-
 
 class TurnHandler:
     def __init__(self, player1, player2):
@@ -40,7 +44,6 @@ class TurnHandler:
     def get_current_player_shape(self):
         return self.current_player.shape
 
-
 def get_input(board, current_player, empty_cell):
     while True:
         row = current_player.get_row_from_input() - 1
@@ -50,7 +53,18 @@ def get_input(board, current_player, empty_cell):
 
         print('sorry this place is already taken please try againe')
 
+def is_winning(board,current_player):
+    for i in range(3):
+        #horozontal line and         #horozontal line and
+        if board[i,0] == board[i,1] == board[i,2] == current_player.shape or board[0,i] == board[1,i] == board[2,i] == current_player.shape:
+            print(f"{current_player.name}wins")
 
+
+    if board[1,1] == board[2,2] == board[0,0] == current_player.shape:
+        print(f"{current_player.name}player wins")
+    if board[1,1] == board[0,2] == board[2,0] == current_player.shape:
+        print(f"{current_player.name}wins")
+    return True
 def main():
     ##########################################################
     # ---------- Init variables ---------------------------
@@ -69,10 +83,11 @@ def main():
     run = True
     while run:
         current_player = turn_handler.current_player
-        row, col = get_input(board, current_player, empty_cell)
-        board[row, col] = current_player.shape
-        turn_handler.update_turn()
         print(board)
+        row, col = get_input(board, current_player, empty_cell)
+        board[row,col] = current_player.shape
+        is_winning(board,current_player)
+        turn_handler.update_turn()
 
 
 if __name__ == '__main__':
